@@ -16,7 +16,7 @@ public class Computer {
 
     public static void writeFile(String content){
         try {
-            FileWriter fw = new FileWriter("output.txt",true);
+            FileWriter fw = new FileWriter("output.txt",false);
             fw.write(content);
             fw.close();
 
@@ -26,16 +26,7 @@ public class Computer {
         }
     }
 
-//    public static void clearFile() {
-//        try {
-//            FileWriter cf = new FileWriter("output.txt", false);
-//            cf.write("");
-//            cf.close();
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
     public static String readFile(String data) {
         try (FileReader reader = new FileReader("output.txt")){
             String result = "";
@@ -52,7 +43,7 @@ public class Computer {
     }
 
     public static void intro() {
-//clearFile();
+
 
         System.out.println("Welcome to computer shop!");
     }
@@ -65,64 +56,89 @@ public class Computer {
         int choice = in.nextInt();
         switch (choice){
             case 1:
-                System.out.println("Choose computer type from the list below: ");
-                System.out.println("1)PC\n2)Laptop\n3)Tablet");
-                choice = in.nextInt();
-                switch (choice){
-                    case 1: String computerType = "PC";
-                    writeFile("\nComputer type: "+computerType);
-                        choice();
-                    case 2:  computerType = "Laptop";
-                        writeFile("\nComputer type: "+computerType);
-                        choice();
-                    case 3: computerType = "Tablet";
-                        writeFile("\nComputer type: "+computerType);
-                        choice();
-                }
+                registration();
+                choice();
             case 2:
-                System.out.println("Enter your name: ");
-                in.nextLine();
-                String name = in.nextLine();
-//                writeFile("\nName: "+name);
-
-                System.out.println("Enter your e-mail: ");
-                String email = in.nextLine();
-//                writeFile("\nE-mail: " + email);
-
-                System.out.println("Create your password: ");
-                String password = in.nextLine();
-//                writeFile("\nPassword: " + password);
-
-                String data = "Name: "+name+"E-mail: "+email+"Password: "+password;
-                writeFile(data);
-
+                login();
+                catalog();
             case 3:
-                int y = 0;
-while (y!=1) {
-    System.out.println("Enter your name: ");
-    in.nextLine();
-    name = in.nextLine();
-
-    System.out.println("Enter your e-mail: ");
-    email = in.nextLine();
-
-    System.out.println("Create your password: ");
-    password = in.nextLine();
-
-    data = "Name: " + name + "E-mail: " + email + "Password: " + password;
-
-    if (Computer.readFile(data).equals(data)) {
-        System.out.println(12345);
-        y++;
-    } else {
-        System.out.println("Some data is incorrect! Try again!");
-    }
-}
-            case 4:
+                System.exit(0);
                 break;
-
         }
     }
+    public static void catalog() {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Choose computer type from the list below: ");
+        System.out.println("1)PC\n2)Laptop\n3)Tablet");
+        int choice = in.nextInt();
+        switch (choice) {
+            case 1:
+//                String computerType = "PC";
+//                writeFile("\nComputer type: " + computerType);
+//                choice();
+                PC pc1 = new PC();
+                PC pc2 = new PC();
+                PC pc3 = new PC();
+                System.out.println("1) " + pc1 + "\n2) " + pc2 + "\n3) " + pc3);
+            case 2:
+                computerType = "Laptop";
+                writeFile("\nComputer type: " + computerType);
+                choice();
+            case 3:
+                computerType = "Tablet";
+                writeFile("\nComputer type: " + computerType);
+                choice();
+        }
+    }
+
+
+public static void registration(){
+        Scanner in  = new Scanner(System.in);
+    System.out.println("Enter your name: ");
+    String name = in.nextLine();
+
+
+    System.out.println("Enter your e-mail: ");
+    String email = in.nextLine();
+
+
+    System.out.println("Create your password: ");
+    String password = in.nextLine();
+
+
+    String data = "Name: "+name+"\nE-mail: "+email+"\nPassword: "+password+"\n";
+    writeFile(data);
+
+
+}
+
+public static void login(){
+    Scanner in  = new Scanner(System.in);
+    int y = 0;
+    while (y!=1) {
+
+        System.out.println("Enter your name: ");
+        String name = in.nextLine();
+
+        System.out.println("Enter your e-mail: ");
+        String email = in.nextLine();
+
+        System.out.println("Create your password: ");
+        String password = in.nextLine();
+
+        String data = "Name: "+name+"\nE-mail: "+email+"\nPassword: "+password+"\n";
+
+        if (Computer.readFile(data).equals(data)) {
+            System.out.println("Login succefull");
+            y++;
+        } else {
+            System.out.println("Some data is incorrect! Try again!");
+        }
+    }
+
+}
+
 
 
 
